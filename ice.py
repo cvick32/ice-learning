@@ -61,7 +61,7 @@ class Learner:
         self.implication_pairs.append((i1, i2))
 
     def run_solver(self):
-        form = l.construct_full_smt_formula()
+        form = self.construct_full_smt_formula()
         s = Solver()
         s.add(form)
         if str(s.check()) == 'sat':
@@ -271,9 +271,9 @@ class Learner:
         return And(conjuncts)
 
 
-num_disjuncts = 1
+num_disjuncts = 2
 num_conjuncts = 1
-upper_bound = 100
+upper_bound = 5
 l = Learner(['i', 'j', 'p'], num_disjuncts, num_conjuncts, upper_bound)
 
 l.add_example({'i': 0, 'j': 0, 'p': 25})
@@ -297,3 +297,10 @@ l.add_implication_pair({'i': 50, 'j': 0, 'p': 25}, {'i': 51, 'j': 0, 'p': 25})
 l.run_solver()
 
 
+# lSmall = Learner(['i', 'Z', 'N'], 5, num_conjuncts, upper_bound)
+# lSmall.add_example({'i': 0, 'Z': 0, 'N': 1})
+# lSmall.add_example({'i': 0, 'Z': 0, 'N': 10})
+
+# lSmall.add_counterexample({'i': 0, 'Z': 0, 'N': 1})
+# lSmall.add_counterexample({'i': 0, 'Z': 0, 'N': 1})
+# lSmall.run_solver()

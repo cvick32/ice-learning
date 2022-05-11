@@ -59,21 +59,23 @@ def debug(post):
     return post
 
 def verify_fun(pre, post, body):
-    prove(Implies(pre, body(post)))
+    final = Implies(pre, body(post))
+    print(final)
+    prove(final)
 
 I = IntSort()
 
 # example from paper
 
-i, j, p = Ints('i j p')
-a = Array('a', I, I)
-ice_example = begin(set_(i, IntVal(0)),
-                    set_(j, IntVal(0)),
-                    while_(i < 100, j != j,
-                           if_(Select(a, i) == 1, set_(j, IntVal(1)), set_(j, j)),
-                           set_(i, i + 1)))
+# i, j, p = Ints('i j p')
+# a = Array('a', I, I)
+# ice_example = begin(set_(i, IntVal(0)),
+#                     set_(j, IntVal(0)),
+#                     while_(i < 100, j != j,
+#                            if_(Select(a, i) == 1, set_(j, IntVal(1)), set_(j, j)),
+#                            set_(i, i + 1)))
 
-verify_fun(And(p >= 25, p < 75, Select(a, p) == 1), j == 1, ice_example)
+# verify_fun(And(p >= 25, p < 75, Select(a, p) == 1), j == 1, ice_example)
 
 # j, k, menor, N = Ints('j k menor N')
 # arr = Array('arr', IntSort(), IntSort())
